@@ -1,7 +1,7 @@
 # from https://github.com/linkernetworks/template-python-project/blob/master/Makefile
 PYTHON := $$(which python3)
 PIP := $(PYTHON) -m pip
-PY_DIRS = linkermetrics tests tools
+PY_DIRS = inference models utils
 PY_SCRIPTS := $$(grep -ERIl '^\#!.+python' $(PY_DIRS) | grep -Ev '**/*.py')
 PY_FILES := $$(find $(PY_DIRS) -name '*.py' | grep -v '\./\.') $(PY_SCRIPTS) setup.py
 CUR_DIR = $(shell echo "${PWD}")

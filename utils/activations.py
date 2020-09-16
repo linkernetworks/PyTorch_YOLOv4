@@ -1,11 +1,11 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.nn as nn
 
 
 # Swish ------------------------------------------------------------------------
 class SwishImplementation(torch.autograd.Function):
+
     @staticmethod
     def forward(ctx, x):
         ctx.save_for_backward(x)
@@ -19,18 +19,21 @@ class SwishImplementation(torch.autograd.Function):
 
 
 class MemoryEfficientSwish(nn.Module):
+
     @staticmethod
     def forward(x):
         return SwishImplementation.apply(x)
 
 
 class HardSwish(nn.Module):  # https://arxiv.org/pdf/1905.02244.pdf
+
     @staticmethod
     def forward(x):
         return x * F.hardtanh(x + 3, 0., 6., True) / 6.
 
 
 class Swish(nn.Module):
+
     @staticmethod
     def forward(x):
         return x * torch.sigmoid(x)
@@ -38,6 +41,7 @@ class Swish(nn.Module):
 
 # Mish ------------------------------------------------------------------------
 class MishImplementation(torch.autograd.Function):
+
     @staticmethod
     def forward(ctx, x):
         ctx.save_for_backward(x)
@@ -52,12 +56,14 @@ class MishImplementation(torch.autograd.Function):
 
 
 class MemoryEfficientMish(nn.Module):
+
     @staticmethod
     def forward(x):
         return MishImplementation.apply(x)
 
 
 class Mish(nn.Module):  # https://github.com/digantamisra98/Mish
+
     @staticmethod
     def forward(x):
         return x * F.softplus(x).tanh()
